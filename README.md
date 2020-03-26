@@ -3,7 +3,7 @@
 Coronavirus tracker using rest api.
 
 # Home Page
-<img src = "assets/main_page.jpg" width = "400">
+<img src = "assets/main_screen.jpg" width = "400">
 
 ## Getting Started
 
