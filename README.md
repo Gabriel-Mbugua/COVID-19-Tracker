@@ -1,6 +1,6 @@
 # covid19tracker
 
-A new Flutter application.
+Coronavirus tracker using rest api.
 
 ## Getting Started
 
