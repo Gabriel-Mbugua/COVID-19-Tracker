@@ -2,6 +2,9 @@
 
 Coronavirus tracker using rest api.
 
+# Home Page
+<img src = "assets/main_page.jpg" width = "400">
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
