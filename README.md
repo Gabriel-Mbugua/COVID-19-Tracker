@@ -1,9 +1,12 @@
-# covid19tracker
+# COVID-19 Tracker
 
-Coronavirus tracker using rest api.
+Coronavirus tracker using a rest api.
 
-# Home Page
-<img src = "assets/main_screen.jpg" width = "400">
+# Home Screen
+<img src = "assets/screen1.png" width = "400">
+
+# Search Screen
+<img src = "assets/screen2.png" width = "400">
 
 ## Getting Started
 
