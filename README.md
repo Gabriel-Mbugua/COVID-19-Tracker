@@ -1,6 +1,9 @@
 # covid19tracker
 
-A new Flutter application.
+Coronavirus tracker using rest api.
+
+# Home Page
+<img src = "assets/main_screen.jpg" width = "400">
 
 ## Getting Started
 
