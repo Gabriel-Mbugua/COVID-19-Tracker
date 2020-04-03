@@ -3,10 +3,7 @@
 Coronavirus tracker using a rest api.
 
 # Home Screen
-<img src = "assets/screen1.png" width = "400">
-
-# Search Screen
-<img src = "assets/screen2.png" width = "400">
+<img src = "assets/screen1.png" width = "400"> <img src = "assets/screen2.png" width = "400">
 
 ## Getting Started
 
