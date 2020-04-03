@@ -1,5 +1,3 @@
-import 'package:covid19tracker/app/services/api_keys.dart';
-import 'package:flutter/cupertino.dart';
 
 enum Endpoint {
   cases,
@@ -10,12 +8,6 @@ enum Endpoint {
 }
 
 class API {
-  final String apiKey;
-
-  API({@required this.apiKey});
-
-  factory API.sandbox() => API(apiKey: APIKeys.ncovSandboxKey);
-
   static final String host = "apigw.nubentos.com";
   static final int port = 443;
   static final String basePath = "/t/nubentos.com/ncovapi/1.0.0";

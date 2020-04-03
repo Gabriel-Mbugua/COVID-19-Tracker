@@ -1,8 +1,9 @@
 import 'dart:convert';
-
-import 'package:flutter/cupertino.dart';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 
+import 'package:covid19tracker/models/summary_data.dart';
+import 'package:covid19tracker/models/country.dart';
 import 'package:covid19tracker/app/services/api.dart';
 
 class APIService {
@@ -10,50 +11,47 @@ class APIService {
 
   APIService({this.api});
 
-  //fetch access token
-  Future<String> getAccessToken() async {
-    final response = await http.post(
-      api.tokenUri().toString(),
-      headers: {'Authorization': 'Basic ${api.apiKey}'},
-    );
+  Future<bool> checkConnection() async {
+    try {
+      final check = await InternetAddress.lookup("google.com");
+      if (check.isNotEmpty && check[0].rawAddress.isNotEmpty) {
+        return true;
+      }
+    } catch (ex) {
+      return false;
+    }
+    return false;
+  }
+
+  Future<void> _checkConnectivity() async {
+    final check = await InternetAddress.lookup("google.com");
+    if (check.isNotEmpty && check[0].rawAddress.isNotEmpty) {
+      getSummaryData().then((_) => getCountries());
+    }
+  }
+
+  Future<SummaryData> getSummaryData() async {
+    final response =
+    await http.get("https://coronavirus-19-api.herokuapp.com/all");
 
     if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      final accessToken = data['access_token'];
-      if (accessToken != null) {
-        return accessToken;
-      }
+      var data = SummaryData.fromJson(json.decode(response.body));
+      print(data);
+      return data;
     }
     throw response;
   }
 
-  Future<int> getEndpointData(
-      {@required String accessToken, @required Endpoint endpoint}) async {
-    final uri = api.endpointUri(endpoint);
-    final response = await http.get(
-      uri.toString(),
-      headers: {"Authorization": 'Bearer $accessToken'},
-    );
+  Future<List<Country>> getCountries() async {
+    final response =
+    await http.get("https://coronavirus-19-api.herokuapp.com/countries");
+
     if (response.statusCode == 200) {
       final List<dynamic> data = json.decode(response.body);
-      if (data.isNotEmpty) {
-        final Map<String, dynamic> endpointData = data[0];
-        final String responseJsonKey = _responseJsonKeys[endpoint];
-        final int result = endpointData[responseJsonKey];
-        if (result != null) {
-          return result;
-        }
-      }
+      final parsed = data.cast<Map<String, dynamic>>();
+      return parsed.map<Country>((json) => Country.fromJson(json)).toList();
     }
-    print("Request $uri failed\nResponse: ${response.statusCode} ${response.reasonPhrase}");
     throw response;
   }
-
-  static Map<Endpoint, String> _responseJsonKeys = {
-    Endpoint.cases: 'cases',
-    Endpoint.casesSuspected: 'data',
-    Endpoint.casesConfirmed: 'data',
-    Endpoint.deaths: 'data',
-    Endpoint.recovered: 'data',
-  };
 }
+
