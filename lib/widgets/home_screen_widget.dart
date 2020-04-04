@@ -25,7 +25,6 @@ class HomeScreenWidget extends StatefulWidget {
 class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   @override
   Widget build(BuildContext context) {
-
     return Container(
       child: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -41,49 +40,35 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
             Flexible(
               child: ListView(
                 children: <Widget>[
-                  LimitedBox(
-                    maxHeight: MediaQuery.of(context).size.height * 0.23,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColorLight,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColorLight,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                    ),
+                    child: ListView(
+                      shrinkWrap: true,
+                      children: <Widget>[
+                        TileWidget(
+                          data: widget.cases,
+                          title: "Cases",
+                          icon: FontAwesomeIcons.clipboardList,
+                          color: Colors.amberAccent,
                         ),
-                      ),
-                      child: Table(
-                        children: [
-                          TableRow(
-                            children: [
-                              TileWidget(
-                                data: widget.cases,
-                                title: "Cases",
-                                icon: FontAwesomeIcons.clipboardList,
-                                color: Colors.amberAccent,
-                              ),
-                            ],
-                          ),
-                          TableRow(
-                            children: [
-                              TileWidget(
-                                data: widget.deaths,
-                                title: "Deaths",
-                                icon: FontAwesomeIcons.biohazard,
-                                color: Colors.red,
-                              ),
-                            ],
-                          ),
-                          TableRow(
-                            children: [
-                              TileWidget(
-                                data: widget.recovered,
-                                title: "Recovered",
-                                icon: FontAwesomeIcons.medkit,
-                                color: Colors.green,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                        TileWidget(
+                          data: widget.deaths,
+                          title: "Deaths",
+                          icon: FontAwesomeIcons.biohazard,
+                          color: Colors.red,
+                        ),
+                        TileWidget(
+                          data: widget.recovered,
+                          title: "Recovered",
+                          icon: FontAwesomeIcons.medkit,
+                          color: Colors.green,
+                        ),
+                      ],
                     ),
                   ),
                   SizedBox(
@@ -93,7 +78,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                       ? Container(
                           decoration: BoxDecoration(
                               color: Theme.of(context).primaryColorLight,
-                              borderRadius: BorderRadius.all(Radius.circular(10))),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
                           child: Column(
                             children: <Widget>[
                               Padding(
@@ -152,28 +138,44 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                               padding:
                                                   const EdgeInsets.all(10.0),
                                               child: Center(
-                                                  child: Text(widget.countries[i].country,)),
+                                                  child: Text(
+                                                widget.countries[i].country,
+                                              )),
                                             )),
                                             TableCell(
                                                 child: Padding(
                                               padding:
                                                   const EdgeInsets.all(10.0),
                                               child: Center(
-                                                  child: Text(widget.countries[i].cases.toString(), style: TextStyle(color: Colors.yellow))),
+                                                  child: Text(
+                                                      widget.countries[i].cases
+                                                          .toString(),
+                                                      style: TextStyle(
+                                                          color:
+                                                              Colors.yellow))),
                                             )),
                                             TableCell(
                                                 child: Padding(
                                               padding:
                                                   const EdgeInsets.all(10.0),
                                               child: Center(
-                                                  child: Text(widget.countries[i].deaths.toString(), style: TextStyle(color: Colors.red))),
+                                                  child: Text(
+                                                      widget.countries[i].deaths
+                                                          .toString(),
+                                                      style: TextStyle(
+                                                          color: Colors.red))),
                                             )),
                                             TableCell(
                                                 child: Padding(
                                               padding:
                                                   const EdgeInsets.all(10.0),
                                               child: Center(
-                                                  child: Text(widget.countries[i].recovered.toString(), style: TextStyle(color: Colors.green),)),
+                                                  child: Text(
+                                                widget.countries[i].recovered
+                                                    .toString(),
+                                                style: TextStyle(
+                                                    color: Colors.green),
+                                              )),
                                             )),
                                           ],
                                         ),

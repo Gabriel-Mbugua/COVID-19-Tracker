@@ -87,7 +87,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       extendBodyBehindAppBar: false,
       backgroundColor: Theme.of(context).primaryColor,
