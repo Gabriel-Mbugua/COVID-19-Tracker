@@ -1,6 +1,6 @@
 # COVID-19 Tracker
 
-Coronavirus tracking up that uses this api https://coronavirus-19-api.herokuapp.com/.
+Coronavirus tracking app that uses this api https://coronavirus-19-api.herokuapp.com/.
 The api retireves information from worldometers ensuring upto date data.
 
 <img src = "assets/screen1.png" width = "400"> <img src = "assets/screen2.png" width = "400">
