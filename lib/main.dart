@@ -30,7 +30,12 @@ class MyApp extends StatelessWidget {
           accentColor: Colors.green,
 //        iconTheme: IconThemeData(size: 50),
         ),
-        darkTheme: ThemeData.dark(),
+        darkTheme: ThemeData(
+          brightness: Brightness.dark,
+          primaryColor: Color(0xff1a1b25),
+          primaryColorLight: Color(0xff242535),
+          accentColor: Colors.green,
+        ),
         home: MyHomePage(),
       ),
     );

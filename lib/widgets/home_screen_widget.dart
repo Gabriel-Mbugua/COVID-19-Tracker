@@ -1,8 +1,8 @@
+import 'package:covid19tracker/models/country.dart';
+import 'package:covid19tracker/widgets/tile_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import 'package:covid19tracker/widgets/tile_widget.dart';
-import 'package:covid19tracker/models/country.dart';
+import 'package:intl/intl.dart';
 
 class HomeScreenWidget extends StatefulWidget {
   final int cases;
@@ -10,19 +10,33 @@ class HomeScreenWidget extends StatefulWidget {
   final int recovered;
   final List<Country> countries;
   final String lastUpdated;
+  final Country userCountry;
 
   HomeScreenWidget(
       {this.cases,
       this.deaths,
       this.recovered,
       this.countries,
-      this.lastUpdated});
+      this.lastUpdated,
+      this.userCountry});
 
   @override
   _HomeScreenWidgetState createState() => _HomeScreenWidgetState();
 }
 
 class _HomeScreenWidgetState extends State<HomeScreenWidget> {
+  final numberFormatter = NumberFormat("#,###");
+  String _userCountry;
+  Country _userCountryInfo;
+
+//  Future<void> _userLocation() async{
+//    print("***********userLocation called");
+//    Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.low);
+//    List<Placemark> placemark = await Geolocator().placemarkFromCoordinates(position.latitude, position.longitude);
+//    print("***********placemark retrieved ${placemark[0].country}");
+//    _userCountry = placemark[0].country;
+//  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -140,6 +154,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                               child: Center(
                                                   child: Text(
                                                 widget.countries[i].country,
+                                                overflow: TextOverflow.ellipsis,
                                               )),
                                             )),
                                             TableCell(
@@ -148,8 +163,12 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                   const EdgeInsets.all(10.0),
                                               child: Center(
                                                   child: Text(
-                                                      widget.countries[i].cases
+                                                      numberFormatter
+                                                          .format(widget
+                                                              .countries[i]
+                                                              .cases)
                                                           .toString(),
+                                                          overflow: TextOverflow.ellipsis,
                                                       style: TextStyle(
                                                           color:
                                                               Colors.yellow))),
@@ -160,8 +179,12 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                   const EdgeInsets.all(10.0),
                                               child: Center(
                                                   child: Text(
-                                                      widget.countries[i].deaths
+                                                      numberFormatter
+                                                          .format(widget
+                                                              .countries[i]
+                                                              .deaths)
                                                           .toString(),
+                                                          overflow: TextOverflow.ellipsis,
                                                       style: TextStyle(
                                                           color: Colors.red))),
                                             )),
@@ -171,8 +194,15 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                   const EdgeInsets.all(10.0),
                                               child: Center(
                                                   child: Text(
-                                                widget.countries[i].recovered
-                                                    .toString(),
+                                                widget.countries[i].recovered !=
+                                                        null
+                                                    ? numberFormatter
+                                                        .format(widget
+                                                            .countries[i]
+                                                            .recovered)
+                                                        .toString()
+                                                    : "N/A",
+                                                    overflow: TextOverflow.ellipsis,
                                                 style: TextStyle(
                                                     color: Colors.green),
                                               )),
